@@ -1,25 +1,28 @@
 import argparse
 import os
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import shutil
 
 
 def get_date(path):
-    creation_date = os.path.getctime(path)
-    return datetime.fromtimestamp(creation_date)
+    mod_date = os.path.getmtime(path)
+    return datetime.fromtimestamp(mod_date)
 
-#TODO: group by date
+#TODO: create folders by date
 def create_folders(source_folder, target, extensions, months):
+    n_months = datetime.now() - timedelta(days=months *30.44) #get the time n months ago in number of months
    
     for root, directories, files in os.walk(source_folder):
         for file in files:
             if file.lower().endswith(tuple(extensions)): #check file extensions
                 file_path = os.path.join(root, file)
-                created_at = get_date(file_path)
-                print("the file: ", file ,"was created at: ", created_at)
+                mod_date  = get_date(file_path)
                
-
+                if mod_date  >=n_months: 
+                    print("less than ",months, " months old: ", file, 'modified at: ', mod_date)
+               
+#months and extensions are optional
 def main():
     parser = argparse.ArgumentParser(description="Organize files by date.")
     parser.add_argument("source_folder", help="Path to the folder to organize.")
