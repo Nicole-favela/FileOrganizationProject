@@ -1,6 +1,9 @@
 ## Python automation for desktop/ folder organization
 
-### organize files in a given source directory over n months 
+### Key features:
+ * dynamic organization: enter only the file types you want or stick with only images.
+ * date based organization: decide on files and have a timeline for easy access.
+ * user-friendly: argparse allows you to taylor the script to your needs and get help if needed.
 
 #### To run:
 ```$python organize.py /full/path/to/messyfolder /full/path/to/target --extensions jpg png --months n```
